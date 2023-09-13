@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Alcohol Concentration Calculator</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Blood Alcohol Concentration Calculator</h1>
+
+  
+
+  <div id="disclamer">
+    <h4>Disclamer</h4>
+    <p>This is not intended as a scientific tool ! This is only an approximation based on formulas I don't understand. </p><br>
+  </div>
+  
+  <div class="container">
+    <canvas id="bacChart"></canvas>
+  </div>
+
+  <iframe name="votar" style="display:none;"></iframe>
+  <div id="ProfileInputSection">
+    <h2>Your Profile</h2>
+    <form id="profileForm" method="post" target="votar">
+      <div>
+        <label for="gender">Biological sex</label>
+        <select id="gender">
+          <option>Men</option>
+          <option>Women</option>
+          <option>Attack helicopter</option>
+        </select>
+      </div>
+      <div>
+        <label for="weight">Weight (kg)</label>
+        <input type="number" class="input" id="weight" min="1" step="0.1" value="60" required><span class="input-border"></span>
+      </div>
+      <div>
+        <label for="height">Height (m)</label>
+        <input type="number" class="input" id="height" min="0" step="0.01" value="1.70" required><span class="input-border"></span>
+      </div>
+      <!-- <button type="submit">Set Profile</button> -->
+      <button type="submit" class="noselect" id="profile">
+        <span class="text">Set Profile</span>
+        <span class="icon" id="profileIcon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16"> <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/> </svg>
+        </span>
+      </button>
+    </form>
+  </div>
+
+  <iframe name="votarDrink" style="display:none;"></iframe>
+  <div id="drinkInputSection" method="post" target="votarDrink">
+    <h2>Input Drinks</h2>
+    <form id="drinkForm">
+      <div>
+        <label for="drinktime">Hour:</label>
+        <input type="datetime-local" class="input" id="drinkTime" class="cal">
+      </div>
+      <div>
+        <label for="volume">Volume (mL):</label>
+        <input type="number" class="input" id="volume" min="1" required>
+      </div>
+      <div>
+        <label for="alcohol">Alcohol %:</label>
+        <input type="number" class="input" id="alcohol" min="0" max="100" step="0.1" required>
+      </div>
+      <!-- <button type="submit">Add Drink</button> -->
+      <button type="submit" class="noselect" id="add">
+        <span class="text">Add Drink</span>
+        <span class="icon" id="addIcon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+            <polyline points="416 70 192 384 40 240" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:102px"/>
+          </svg>
+        </span>
+      </button>
+      <!-- 
+        M24 
+        20.188l-8.315-8.209
+        8.2-8.282-3.697-3.697-8.212
+        8.318-8.31-8.203-3.666
+        3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z
+       -->
+
+    </form>
+  </div>
+
+  <div id="drinkList">
+    <h2>Drink List</h2>
+    <!-- <ul id="list"></ul> -->
+    <div id="list">
+      
+    </div>
+  </div>
+  <br>
+  
+  <!-- <button class="noselect" id="delete">
+    <span class="text">Delete</span>
+    <span class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+      </svg>
+    </span>
+  </button> -->
+  
+  <script src="date.js"></script>
+  <script src="chart.js"></script>
+  <script src="drink.js"></script>
+  <script src="bac_calculator.js"></script>
+  <script src="profile.js"></script>
+  <script src="main.js"></script>
+
+  
+  <div id="sources">
+    <br><br><br><br><br><br><br><br><br>
+    <h2>Calculs from : </h2>
+  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4361698/">Alcohol calculations and their uncertainty</a>
+  <br></br>
+  <!-- <a href="https://www.nist.gov/system/files/documents/2021/07/02/2020-S-0003_Guidelines%20for%20Performing%20Alcohol%20Calculations%20in%20Forensic%20Toxicology_Open%20Comment%20Version.pdf">Guidelines for Performing
+    Alcohol Calculations in
+    Forensic Toxicology</a> -->
+  </div>
+
+  
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+html {
+  background-color: #222222;
+  color: white;
+}
+
+.container {
+    width: 80%;
+    height: 300px;
+    margin: 20px auto;
+  }
+  
+  #ProfileInputSection {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  #drinkInputSection {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  #drinkList {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  #drinkList {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  #list {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: left;
+    flex-wrap: wrap;
+  }
+  
+  #list li {
+    margin-bottom: 10px;
+  }
+  
+  #list li button {
+    margin-left: 10px;
+  }
+
+  h4 {
+    margin-left: 10px;
+    font-size: 15px;
+    color: #DD3333;
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+
+  #disclamer {
+    font-size: 12px;
+    line-height: 13px;
+  }
+  
+  #sources {
+    font-size: 10px;
+    line-height: 7px;
+  }
+
+  a {
+    color: #aeaeff
+  }
+
+  .drinkDiv {
+    width:max-content;
+    border: 2px solid white;
+    border-radius: 5%;
+    padding: 10px;
+    margin: 10px;
+  }
+
+
+  /* test delete button */
+
+  #delete {
+    
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: rgb(177, 0, 0);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+   }
+
+   #add {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: green;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    text-indent: -30%;
+   }
+
+   #profile {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: rgb(3, 3, 139);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    text-indent: -30%;
+    /* background: #21a108; */
+   }
+
+   
+   button, button span {
+    transition: 200ms;
+   }
+
+   /* path {
+    display:inline-block;
+    width: 15.1px;
+    height: 15.1px;
+   }
+    */
+   button .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+   }
+   
+   button .icon {
+    position: absolute;
+    /* border-left: 1px solid #c41b1b; */
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+
+   #addIcon{
+    border-left: 1px solid #b0ffa0;
+   }
+
+   #deleteIcon{
+    border-left: 1px solid #ffbbbb;
+   }
+
+   #profileIcon{
+    border-left: 1px solid #bbbfff;
+   }
+   
+   button svg {
+    width: 15px;
+    /* height: 24px; */
+    fill: #eee;
+   }
+
+   button:hover {
+    background: #ff3636;
+   }
+   
+   /* button:hover #delete {
+    background: #ff3636;
+   }
+
+   button:hover #add {
+    background: #3dff36;
+   } */
+   
+   button:hover .text {
+    color: transparent;
+   }
+   
+   button:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   button:focus {
+    outline: none;
+   }
+   
+   button:active .icon svg {
+    transform: scale(0.8);
+   }
+
+   /* test inputs  */
+
+   .form {
+    --width-of-input: 200px;
+    --border-height: 1px;
+    --border-before-color: rgba(221, 221, 221, 0.39);
+    --border-after-color: #5891ff;
+    --input-hovered-color: #4985e01f;
+    position: relative;
+    width: var(--width-of-input);
+   }
+   /* styling of Input */
+   .input {
+    color: #fff;
+    font-size: 0.9rem;
+    background-color: #444;
+    /* width: 100%; */
+    box-sizing: border-box;
+    padding-inline: 0.5em;
+    padding-block: 0.7em;
+    border: none;
+    border-bottom: var(--border-height) solid var(--border-before-color);
+   }
+   /* styling of animated border */
+   .input-border {
+    position: absolute;
+    background: var(--border-after-color);
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s;
+   }
+   /* Hover on Input */
+   input:hover {
+    background: #383838; /*var(--input-hovered-color);*/
+   }
+   
+   input:focus {
+    outline: none;
+   }
+   /* here is code of animated border */
+   /* input:focus ~ .input-border {
+    width: 100%;
+   } */
+   /* === if you want to do animated border on typing === */
+   /* remove input:focus code and uncomment below code */
+   input:valid ~ .input-border{
+     width: 100%;
+   }
