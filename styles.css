@@ -244,3 +244,46 @@ html {
    input:valid ~ .input-border{
      width: 100%;
    }
+
+
+
+
+#resetContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#resetButton {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: #fa3737;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  text-indent: -60%;
+}
+
+#resetIcon {
+  border-left: 1px solid #ffbbbb;
+}
+
+#resetButton:hover {
+  background: #ff3636;
+}
+
+#resetButton:hover .text {
+  color: transparent;
+}
+
+#resetButton:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(0);
+}
+
+#resetButton:active .icon svg {
+  transform: scale(0.8);
+}

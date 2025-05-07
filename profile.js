@@ -4,7 +4,11 @@ function setProfile(event) {
     weight = parseFloat(document.getElementById('weight').value);
     height= parseFloat(document.getElementById('height').value);
 
+    // Update chart with new profile data
     updateChart();
+
+    // Save profile data to cookies
+    saveDataToCookies();
 }
 
 const profileForm = document.getElementById('profileForm');
