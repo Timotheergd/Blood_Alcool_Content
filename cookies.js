@@ -2,10 +2,11 @@
 
 // Set a cookie with a specified name, value, and expiration days
 function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))};expires=${expires.toUTCString()};path=/`;
-  }
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))};` +
+                    `expires=${expires};path=/;Secure;SameSite=Lax`;
+}
+
   
   // Get a cookie by name
   function getCookie(name) {
