@@ -1,5 +1,6 @@
 // import {Chart} from 'chart.js';
 // import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 // Function to update the chart
 function updateChart() {
   const container = document.querySelector('.container');
@@ -8,11 +9,11 @@ function updateChart() {
   const bacData = calculateBAC();
   const ctx = document.getElementById('bacChart').getContext('2d');
 
-  // Build confidence interval that resets on rises and shrinks/grows with the center on falls
+  // Build confidence interval: resets on rises, moves with center on falls, clamps at zero
   const upperLimitData = [];
   const lowerLimitData = [];
-  let upper, lower;
-  let tensionValue = 0.3; 
+  let upper = 0, lower = 0, diff = 0;
+  let tensionValue = 0.3;
 
   bacData.bacData.forEach((v, i) => {
     if (i === 0) {
@@ -20,19 +21,24 @@ function updateChart() {
       lower = v * 0.79;
     } else {
       const prev = bacData.bacData[i - 1];
-      const diff = v - prev;
+      if (v > 0) {
+        diff = v - prev; //to continue to go down for the upper limit after center hit 0
+      }
       if (v > prev) {
         // reset to ±21% on rise
-        upper = v * 1.21;
-        lower = v * 0.79;
+        upper = upper + diff * 1.21;
+        lower = lower + diff * 0.79;
       } else {
-        // shrink/grow interval at same rate as center
-        upper += diff;
-        lower += diff;
+        // shrink/grow interval with center on falls
+        upper += diff*0.875;
+        lower += diff*1.125;
       }
     }
+
     // ensure lower bound never drops below zero
     lower = Math.max(lower, 0);
+    // ensure upper bound never drops below zero
+    upper = Math.max(upper, 0);
 
     upperLimitData.push(upper);
     lowerLimitData.push(lower);
@@ -54,7 +60,7 @@ function updateChart() {
           pointBackgroundColor: 'rgba(75, 192, 192, 1)',
         },
         {
-          label: 'Confidence Interval (±21%)',
+          label: 'Confidence Interval',
           data: upperLimitData,
           tension: tensionValue,
           borderColor: 'rgba(255, 165, 0, 1)',
@@ -65,7 +71,7 @@ function updateChart() {
         },
         {
           // lower CI, hidden in legend
-          label: 'Confidence Interval (±21%)',
+          label: 'Confidence Interval',
           data: lowerLimitData,
           tension: tensionValue,
           borderColor: 'rgba(255, 165, 0, 1)',
@@ -109,8 +115,7 @@ function updateChart() {
             // only show one CI entry
             filter: (legendItem, data) => {
               const idx = legendItem.datasetIndex;
-              if (data.datasets[idx].label === 'Confidence Interval (±21%)' && idx === 2) return false;
-              return true;
+              return !(data.datasets[idx].label === 'Confidence Interval' && idx === 2);
             }
           },
           onClick: function(e, legendItem) {
