@@ -67,7 +67,7 @@ function updateChart() {
           borderWidth: 1,
           borderDash: [4, 4],
           backgroundColor: 'rgba(255, 165, 0, 0.2)',
-          fill: { target: 0, above: 'rgba(255, 165, 0, 0.2)' }
+          fill: { target: 2, above: 'rgba(255, 165, 0, 0.2)' }
         },
         {
           // lower CI, hidden in legend
@@ -78,7 +78,7 @@ function updateChart() {
           borderWidth: 1,
           borderDash: [4, 4],
           backgroundColor: 'rgba(255, 165, 0, 0.2)',
-          fill: { target: 0, below: 'rgba(255, 165, 0, 0.2)' }
+          fill: { target: 1, below: 'rgba(255, 165, 0, 0.2)' }
         },
         {
           label: 'Legal Limit',
@@ -112,22 +112,40 @@ function updateChart() {
           labels: {
             color: '#ccc',
             usePointStyle: true,
-            // only show one CI entry
+            // Only show one CI label
             filter: (legendItem, data) => {
               const idx = legendItem.datasetIndex;
               return !(data.datasets[idx].label === 'Confidence Interval' && idx === 2);
             }
           },
           onClick: function(e, legendItem) {
-            const ciLabel = legendItem.text;
-            const ciDatasets = this.chart.data.datasets
-              .map((d, i) => ({d, i}))
-              .filter(obj => obj.d.label === ciLabel);
-            ciDatasets.forEach(obj => {
-              const meta = this.chart.getDatasetMeta(obj.i);
-              meta.hidden = meta.hidden === null ? true : !meta.hidden;
-            });
-            this.chart.update();
+            const chart = this.chart;
+            const dsIndex = legendItem.datasetIndex;
+            const label   = chart.data.datasets[dsIndex].label;
+            // find all CI dataset-indices
+            const ciIndices = chart.data.datasets
+              .map((d,i) => d.label === 'Confidence Interval' ? i : null)
+              .filter(i => i !== null);
+    
+            if (label === 'BAC') {
+              // toggle only the BAC dataset
+              const meta = chart.getDatasetMeta(dsIndex);
+              meta.hidden = !meta.hidden;
+            }
+            else if (label === 'Confidence Interval') {
+              // toggle *both* CI datasets
+              ciIndices.forEach(i => {
+                const meta = chart.getDatasetMeta(i);
+                meta.hidden = !meta.hidden;
+              });
+            }
+            else {
+              // fallback (e.g. Legal Limit)
+              const meta = chart.getDatasetMeta(dsIndex);
+              meta.hidden = !meta.hidden;
+            }
+    
+            chart.update();
           }
         },
         datalabels: { display: false }
